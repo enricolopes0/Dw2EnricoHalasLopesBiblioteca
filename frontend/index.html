@@ -4,40 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Biblioteca</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <header>
+        <header role="banner">
             <h1>Sistema de Biblioteca</h1>
         </header>
 
-        <main>
-            <section id="form-section">
-                <h2>Cadastrar Novo Livro</h2>
-                <form id="livro-form">
+        <main role="main">
+            <section id="form-section" aria-labelledby="form-title">
+                <h2 id="form-title">Cadastrar Novo Livro</h2>
+                <form id="livro-form" aria-label="Formulário de cadastro de livro">
                     <div class="form-group">
                         <label for="titulo">Título:</label>
-                        <input type="text" id="titulo" name="titulo" required>
+                        <input type="text" id="titulo" name="titulo" required 
+                               aria-required="true" 
+                               aria-label="Título do livro">
                     </div>
                     <div class="form-group">
                         <label for="autor">Autor:</label>
-                        <input type="text" id="autor" name="autor" required>
+                        <input type="text" id="autor" name="autor" required 
+                               aria-required="true"
+                               aria-label="Nome do autor">
                     </div>
                     <div class="form-group">
                         <label for="ano">Ano de Publicação:</label>
-                        <input type="number" id="ano" name="ano_publicacao" required>
+                        <input type="number" id="ano" name="ano_publicacao" required 
+                               aria-required="true"
+                               aria-label="Ano de publicação"
+                               min="1" max="9999">
                     </div>
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit" aria-label="Cadastrar novo livro">Cadastrar</button>
                 </form>
             </section>
 
-            <section id="lista-section">
-                <h2>Livros Cadastrados</h2>
-                <div id="livros-lista"></div>
+            <section id="lista-section" aria-labelledby="lista-title">
+                <h2 id="lista-title">Livros Cadastrados</h2>
+                <div id="livros-lista" role="list" aria-label="Lista de livros cadastrados"></div>
             </section>
         </main>
     </div>
-    <script src="js/script.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>

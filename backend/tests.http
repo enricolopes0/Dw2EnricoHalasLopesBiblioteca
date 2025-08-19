@@ -1,0 +1,41 @@
+###
+@name Get all books
+GET http://localhost:8000/livros/
+Accept: application/json
+
+###
+@name Get book by ID
+GET http://localhost:8000/livros/1
+Accept: application/json
+
+###
+@name Create new book
+POST http://localhost:8000/livros/
+Content-Type: application/json
+
+{
+    "titulo": "O Senhor dos Anéis",
+    "autor": "J.R.R. Tolkien",
+    "ano_publicacao": 1954
+}
+
+###
+@name Delete book
+DELETE http://localhost:8000/livros/1
+Accept: application/json
+
+###
+@name Get non-existent book (404 test)
+GET http://localhost:8000/livros/999
+Accept: application/json
+
+###
+@name Create invalid book (422 test)
+POST http://localhost:8000/livros/
+Content-Type: application/json
+
+{
+    "titulo": "",
+    "autor": "",
+    "ano_publicacao": "invalid"
+}
