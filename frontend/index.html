@@ -3,48 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Biblioteca</title>
+    <title>Biblioteca Escolar</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header role="banner">
-            <h1>Sistema de Biblioteca</h1>
+            <div class="logo">Biblioteca Escolar</div>
+            <div class="search-bar">
+                <input type="search" 
+                       id="busca" 
+                       placeholder="Buscar por título ou autor..." 
+                       aria-label="Buscar livros">
+            </div>
         </header>
 
-        <main role="main">
-            <section id="form-section" aria-labelledby="form-title">
-                <h2 id="form-title">Cadastrar Novo Livro</h2>
-                <form id="livro-form" aria-label="Formulário de cadastro de livro">
-                    <div class="form-group">
-                        <label for="titulo">Título:</label>
-                        <input type="text" id="titulo" name="titulo" required 
-                               aria-required="true" 
-                               aria-label="Título do livro">
-                    </div>
-                    <div class="form-group">
-                        <label for="autor">Autor:</label>
-                        <input type="text" id="autor" name="autor" required 
-                               aria-required="true"
-                               aria-label="Nome do autor">
-                    </div>
-                    <div class="form-group">
-                        <label for="ano">Ano de Publicação:</label>
-                        <input type="number" id="ano" name="ano_publicacao" required 
-                               aria-required="true"
-                               aria-label="Ano de publicação"
-                               min="1" max="9999">
-                    </div>
-                    <button type="submit" aria-label="Cadastrar novo livro">Cadastrar</button>
-                </form>
-            </section>
+        <aside class="sidebar" role="complementary">
+            <div class="filtros">
+                <h3>Filtros</h3>
+                <div class="filtro-grupo">
+                    <label for="filtro-genero">Gênero</label>
+                    <select id="filtro-genero" aria-label="Filtrar por gênero">
+                        <option value="">Todos</option>
+                        <option value="romance">Romance</option>
+                        <option value="ficcao">Ficção</option>
+                        <option value="nao-ficcao">Não Ficção</option>
+                        <option value="tecnico">Técnico</option>
+                    </select>
+                </div>
+                <div class="filtro-grupo">
+                    <label for="filtro-ano">Ano</label>
+                    <input type="number" id="filtro-ano" min="1900" max="2025" aria-label="Filtrar por ano">
+                </div>
+                <div class="filtro-grupo">
+                    <label for="filtro-status">Status</label>
+                    <select id="filtro-status" aria-label="Filtrar por status">
+                        <option value="">Todos</option>
+                        <option value="disponivel">Disponível</option>
+                        <option value="emprestado">Emprestado</option>
+                    </select>
+                </div>
+            </div>
+        </aside>
 
-            <section id="lista-section" aria-labelledby="lista-title">
-                <h2 id="lista-title">Livros Cadastrados</h2>
-                <div id="livros-lista" role="list" aria-label="Lista de livros cadastrados"></div>
-            </section>
+        <main role="main">
+            <div class="acoes">
+                <button class="btn btn-primario" id="btn-novo-livro" aria-label="Adicionar novo livro">
+                    Novo Livro
+                </button>
+                <button class="btn btn-secundario" id="btn-exportar" aria-label="Exportar lista de livros">
+                    Exportar
+                </button>
+            </div>
+            <div class="livros-grid" role="list" aria-label="Lista de livros"></div>
         </main>
     </div>
+
+    <!-- Modal Novo Livro -->
+    <div class="modal" id="modal-novo-livro" role="dialog" aria-labelledby="modal-titulo">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-titulo">Novo Livro</h2>
+                <button class="modal-close" aria-label="Fechar modal">&times;</button>
+            </div>
+            <form id="form-livro">
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" id="titulo" name="titulo" required
+                           minlength="3" maxlength="90"
+                           aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="autor">Autor</label>
+                    <input type="text" id="autor" name="autor" required
+                           aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="ano">Ano</label>
+                    <input type="number" id="ano" name="ano_publicacao" required
+                           min="1900" max="2025"
+                           aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="genero">Gênero</label>
+                    <select id="genero" name="genero">
+                        <option value="romance">Romance</option>
+                        <option value="ficcao">Ficção</option>
+                        <option value="nao-ficcao">Não Ficção</option>
+                        <option value="tecnico">Técnico</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="isbn">ISBN</label>
+                    <input type="text" id="isbn" name="isbn">
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status" name="status" required>
+                        <option value="disponivel">Disponível</option>
+                        <option value="emprestado">Emprestado</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primario">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Empréstimo/Devolução -->
+    <div class="modal" id="modal-emprestimo" role="dialog" aria-labelledby="modal-emprestimo-titulo">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-emprestimo-titulo">Empréstimo/Devolução</h2>
+                <button class="modal-close" aria-label="Fechar modal">&times;</button>
+            </div>
+            <form id="form-emprestimo">
+                <div class="form-group">
+                    <p id="livro-titulo"></p>
+                    <p id="livro-status"></p>
+                </div>
+                <button type="submit" class="btn btn-primario">Confirmar</button>
+            </form>
+        </div>
+    </div>
+
     <script src="scripts.js"></script>
 </body>
 </html>
